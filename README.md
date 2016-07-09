@@ -11,6 +11,7 @@
  3. Instalar dependencias de bower
 
 	```cd pirates/www```
+	
 	```bower install```
 
  4. Correr cordova
