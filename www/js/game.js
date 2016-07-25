@@ -1,5 +1,16 @@
-define(function() {
+define(function(require) {
    
+    if(AdMob) {
+        var config = require('config');
+
+        AdMob.createBanner({
+            adId: config.admobAdId,
+            position: AdMob.AD_POSITION.TOP_CENTER,
+            autoShow: true,
+            isTesting: config.admobTesting 
+        });
+    }
+
     var tolerance = 30;
 
     var positions = [
@@ -11,6 +22,8 @@ define(function() {
         [ 534, 1407 ],
         [ 615, 606 ],
     ];
+
+    var attempts = 0;
 
     var okImage = new Image();
     okImage.src = 'img/ok.png';
@@ -44,7 +57,14 @@ define(function() {
     }
 
     var onClick = function(ev) {
-        if(ev.target.className != 'pirate') return;
+        if(ev.target.className != 'pirate') {
+            return;
+        }
+        if(attempts >= positions.length) {
+            return;
+        }
+
+        attempts++;
 
         var x = ev.offsetX,
             y = ev.offsetY;

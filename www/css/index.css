@@ -5,20 +5,23 @@ html, body, div.app {
 
 div.pirate {
     position: relative;
-    width: 48%;
+    width: 45%;
     height: 80%;
     float: left;
-    border: 1px solid red;
 }
 
 div#leftPirate {
     background: url('../img/pirate-1.png') no-repeat;
     background-size: contain;
+    background-position: left; 
+    border-right: 2px solid red;
 }
 
 div#rightPirate {
     background: url('../img/pirate-2.png') no-repeat;
     background-size: contain;
+    background-position: left; 
+    border-left: 2px solid blue;
 }
 
 
