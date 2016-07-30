@@ -1,8 +1,8 @@
 define(function(require) {
+        
+    var config = require('config');
    
     if(AdMob) {
-        var config = require('config');
-
         AdMob.createBanner({
             adId: config.admobAdId,
             position: AdMob.AD_POSITION.TOP_CENTER,
@@ -10,8 +10,6 @@ define(function(require) {
             isTesting: config.admobTesting 
         });
     }
-
-    var tolerance = 30;
 
     var positions = [
         [ 501, 393 ],
@@ -23,6 +21,9 @@ define(function(require) {
         [ 615, 606 ],
     ];
 
+	var basePath = ( 'Android' === device.platform || 'android' === device.platform ? '/android_asset/www/' : '' );
+	var tapSound = new Media(basePath + 'audios/tap.wav');
+
     var attempts = 0;
 
     var okImage = new Image();
@@ -30,12 +31,28 @@ define(function(require) {
     var koImage = new Image();
     koImage.src = 'img/ko.png';
 
-    var fullHeight = 1906;
-    var leftPirate = document.getElementById('leftPirate');
-    var rightPirate = document.getElementById('rightPirate');
-    var imageHeight = leftPirate.clientHeight;
-    var scale = imageHeight/fullHeight;
-    positions = positions.map(function(point) { return [ point[0] * scale, point[1] * scale ]; });
+    var leftPirate = document.getElementById('leftPirate'),
+        rightPirate = document.getElementById('rightPirate');
+
+    var fullWidth = 974,
+        fullHeight = 1906;
+
+    var scaledWidth = leftPirate.clientWidth,
+        scaledHeight = leftPirate.clientHeight;
+
+    var scalew = scaledWidth / fullWidth;
+    var scaleh = scalew;
+
+    var tolerance = 100 * scaleh;
+
+    positions = positions.map(function(point) { return [ point[0] * scalew, point[1] * scaleh ]; });
+
+    if(config.debug) {
+        positions.forEach(function(pos) {
+            addMark(leftPirate, 'ko', pos[0], pos[1]);
+            addMark(rightPirate, 'ko', pos[0], pos[1]);
+        });
+    }
 
     function around(value, against, margin) {
         return ( against - margin ) <= value && value <= ( against + margin );
@@ -46,10 +63,12 @@ define(function(require) {
     }
 
     function addMark(pirate, type, x, y) {
+        var parentLeft = pirate.offsetLeft,
+            parentTop = pirate.offsetTop;
         var image = new Image();
         image.src = 'img/' + type + '.png';
-        image.style.left = ( x - tolerance ) + 'px';
-        image.style.top = ( y - tolerance ) + 'px';
+        image.style.left = ( parentLeft + ( x - tolerance ) ) + 'px';
+        image.style.top = ( parentTop + ( y - tolerance ) ) + 'px';
         image.style.position = 'absolute';
         image.style.width = tolerance * 2 + 'px';
         image.style.height = tolerance * 2 + 'px';
@@ -57,12 +76,15 @@ define(function(require) {
     }
 
     var onClick = function(ev) {
-        if(ev.target.className != 'pirate') {
+        if(ev.target.className != 'pirate-img') {
             return;
         }
+
         if(attempts >= positions.length) {
             return;
         }
+
+        tapSound.play();
 
         attempts++;
 

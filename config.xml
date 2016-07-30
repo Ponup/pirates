@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ponup.pirates" version="0.7.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ponup.pirates" version="0.7.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Pirates</name>
     <description>Simple "spot-the-difference" game.</description>
     <author email="game+pirates@ponup.com" href="http://ponup.com">Ponup Games</author>
@@ -25,4 +25,6 @@
     <engine name="browser" spec="~4.1.0" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-admobpro" spec="~2.18.0" />
+    <plugin name="cordova-plugin-media" spec="~2.3.0" />
+    <plugin name="cordova-plugin-device" spec="~1.1.2" />
 </widget>
