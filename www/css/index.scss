@@ -1,0 +1,41 @@
+@import "../bower_components/normalize-css/normalize.css";
+@import "../bower_components/material-color/material-color.scss";
+@import "mixins.scss";
+@import "kirifont.css";
+
+html, body, div.app {
+    height: 100%;
+
+}
+body    {
+    text-align: center;
+    background-color: $clr-pink-500;
+    color: #fff;
+    font-family: "Kirifont";
+}
+
+h1 { display: none; }
+
+div.pirate {
+    position: relative;
+    width: 90%;
+    margin:5%;
+    height: 45%;
+    background-color: $clr-white;
+    float: left;
+    @include box-shadow(0px 3px 10px $clr-pink-800);
+    @include border-radius(10px);
+    background-size: auto 90%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    @media (orientation: landscape) {
+        width: 40%;
+        height: 80%;
+    }
+}
+
+div#leftPirate {background-image: url('../img/pirate-1.png') ; }
+
+div#rightPirate {background-image: url('../img/pirate-2.png') ; }
+
+

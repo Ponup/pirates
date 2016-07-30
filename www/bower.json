@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "requirejs": "^2.2.0"
+    "requirejs": "^2.2.0",
+    "normalize-css": "normalize.css#^4.2.0",
+    "material-color": "^2.2.1"
   }
 }
