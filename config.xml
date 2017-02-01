@@ -15,6 +15,7 @@
     <allow-intent href="geo:*" />
     <icon src="res/mipmap-hdpi/ic_launcher.png" />
     <platform name="android">
+        <hook type="after_prepare" src="hooks/remove-permissions.js" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
